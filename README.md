@@ -1,2 +1,2 @@
 # gRPC-quickStart
-Through this project you can quickly learn how to use GRPC
+Through this project you will quickly learn how to use GRPC and understand its core principles
