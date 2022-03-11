@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package gRPC.quickStart.useCpu;
+option go_package ="./;pb";
+
+message Keyboard {
+  //the layout of keyboard
+  enum Layout {
+    UNKNOWN = 0;
+    QWERTY = 1;
+    QWERTZ = 2;
+    AZERTY = 3;
+  }
+
+  Layout layout = 1;
+  bool backlit = 2;
+}

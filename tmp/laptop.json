@@ -1,0 +1,61 @@
+{
+   "id": "69de1915-b51e-406d-b83f-146bfe6f4ea9",
+   "bread": "Lenovo",
+   "name": "Thinkpad x1",
+   "cpu": {
+      "brand": "AMD",
+      "name": "5600X",
+      "number_cores": 6,
+      "number_threads": 9,
+      "min_ghz": 3.0487235019848433,
+      "max_ghz": 3.7661235006439475
+   },
+   "ram": {
+      "value": "45",
+      "unit": "GIGABYTE"
+   },
+   "gpus": [
+      {
+         "brand": "NVIDIA",
+         "name": "RX 580",
+         "min_ghz": 1.2210662322891759,
+         "max_ghz": 1.4189550795047463,
+         "memory": {
+            "value": "4",
+            "unit": "GIGABYTE"
+         }
+      }
+   ],
+   "storages": [
+      {
+         "driver": "SSD",
+         "memory": {
+            "value": "728",
+            "unit": "GIGABYTE"
+         }
+      },
+      {
+         "driver": "HDD",
+         "memory": {
+            "value": "2",
+            "unit": "TERABYTE"
+         }
+      }
+   ],
+   "screen": {
+      "size_inch": 16.866146,
+      "resolution": {
+         "width": 5664,
+         "height": 3186
+      },
+      "panel": "OLED"
+   },
+   "keyboard": {
+      "layout": "QWERTY",
+      "backlit": true
+   },
+   "weight_kg": 1.8074331830914852,
+   "price_usd": 2845.245197384577,
+   "release_year": 2019,
+   "updated_at": "2022-03-10T07:46:55.981770Z"
+}

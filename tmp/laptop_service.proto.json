@@ -1,0 +1,60 @@
+{
+   "id": "d0ccd8e5-ba12-4270-8915-4dd5605abdef",
+   "bread": "Dell",
+   "name": "Vostro",
+   "cpu": {
+      "brand": "Intel",
+      "name": "G7400",
+      "number_cores": 4,
+      "number_threads": 5,
+      "min_ghz": 2.2908579905060034,
+      "max_ghz": 2.9340280396431773
+   },
+   "ram": {
+      "value": "16",
+      "unit": "GIGABYTE"
+   },
+   "gpus": [
+      {
+         "brand": "AMD",
+         "name": "RX Vega-56",
+         "min_ghz": 1.385086784739289,
+         "max_ghz": 1.5696284589947604,
+         "memory": {
+            "value": "2",
+            "unit": "GIGABYTE"
+         }
+      }
+   ],
+   "storages": [
+      {
+         "driver": "SSD",
+         "memory": {
+            "value": "370",
+            "unit": "GIGABYTE"
+         }
+      },
+      {
+         "driver": "HDD",
+         "memory": {
+            "value": "6",
+            "unit": "TERABYTE"
+         }
+      }
+   ],
+   "screen": {
+      "size_inch": 15.074324,
+      "resolution": {
+         "width": 4067,
+         "height": 2288
+      },
+      "panel": "OLED"
+   },
+   "keyboard": {
+      "layout": "QWERTY"
+   },
+   "weight_kg": 1.9673528887179557,
+   "price_usd": 2585.5991280942176,
+   "release_year": 2019,
+   "updated_at": "2022-03-10T13:21:30.187631Z"
+}
