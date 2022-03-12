@@ -7,7 +7,6 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"log"
-	"time"
 	"useCpu/pb"
 )
 
@@ -22,7 +21,7 @@ func NewLaptopServer(store LaptopStore) *LaptopServer {
 func (server *LaptopServer) CreateLaptop(
 	ctx context.Context,
 	req *pb.CreateLaptopRequest,
-)(*pb.CreateLaptopResponse, error){
+) (*pb.CreateLaptopResponse, error) {
 	laptop := req.GetLaptop()
 	log.Printf("receive a create-laptop request with id: %s", laptop.Id)
 
@@ -31,7 +30,7 @@ func (server *LaptopServer) CreateLaptop(
 		if err != nil {
 			return nil, status.Errorf(codes.InvalidArgument, "laptop ID is not a valiad UUID: %v", err)
 		}
-   }else {
+	} else {
 		id, err := uuid.NewUUID()
 		if err != nil {
 			return nil, status.Errorf(codes.Internal, "cannot generate a new laptop ID: %v", err)
@@ -39,14 +38,14 @@ func (server *LaptopServer) CreateLaptop(
 		laptop.Id = id.String()
 	}
 
-	time.Sleep(6 * time.Second)
+	//time.Sleep(6 * time.Second)
 	if ctx.Err() == context.Canceled {
 		log.Print("request is canceled")
-		return nil,status.Error(codes.Canceled, "request is canceled")
+		return nil, status.Error(codes.Canceled, "request is canceled")
 	}
 	if ctx.Err() == context.DeadlineExceeded {
 		log.Print("deadline is exceeded")
-		return nil,status.Error(codes.DeadlineExceeded, "deadline is exceeded")
+		return nil, status.Error(codes.DeadlineExceeded, "deadline is exceeded")
 	}
 	// save the laptop to store
 	err := server.Store.Save(laptop)
@@ -55,11 +54,39 @@ func (server *LaptopServer) CreateLaptop(
 		if errors.Is(err, ErrAlreadyExists) {
 			code = codes.AlreadyExists
 		}
-		return nil,status.Errorf(code, "cannot save laptop to the store: %v", err)
+		return nil, status.Errorf(code, "cannot save laptop to the store: %v", err)
 	}
 	log.Printf("save laptop with id %s", laptop.Id)
 	res := &pb.CreateLaptopResponse{
 		Id: laptop.Id,
 	}
-	return res,nil
+	return res, nil
+}
+
+func (server *LaptopServer) SearchLaptop(
+	req *pb.SearchLaptopRequest,
+	stream pb.LaptopService_SearchLaptopServer,
+) error {
+	filter := req.GetFilter()
+	log.Printf("receive a search-laptop request with filter: %v", filter)
+
+	err := server.Store.Search(
+		stream.Context(),
+		filter,
+		func(laptop *pb.Laptop) error {
+			res := &pb.SearchLaptopResponse{Laptop: laptop}
+
+			err := stream.Send(res)
+			if err != nil {
+				return err
+			}
+
+			log.Printf("sent laptop with id: %s", laptop.GetId())
+			return nil
+		},
+	)
+	if err != nil {
+		return status.Errorf(codes.Internal, "unexpected error %v", err)
+	}
+	return nil
 }
